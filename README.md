@@ -1,4 +1,4 @@
-Agora vamos criar um arquivo passowrd para nosso banco de dados:
+Criar um arquivo passowrd para nosso banco de dados:
 
 $ openssl rand -base64 32 > db_password.txt
 $ openssl rand -base64 32 > db_root_password.txt
@@ -11,13 +11,14 @@ Enter the root password which is in db_root_password.txt
 
 -----
 
-How to reduce the memory usage of MySQL:
+Como reduzir o uso de memória do MySQL:
 
-Locate your my.cnf file
+Localize o arquivo my.cnf
 
 $ /etc/mysql
 $ nano my.cnf
 
+Edite: 
 
 [mysqld]
 #max_allowed_packet = 990M
