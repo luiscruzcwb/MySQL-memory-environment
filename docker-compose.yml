@@ -1,26 +1,36 @@
-version: '3.3'
+version: '3.7'
 services:
-   #Mysql DB
-   db:
-     image: mysql:5.7
-     container_name: Mysqldb
-     restart: unless-stopped
-     volumes:
-       - db_data:/var/lib/mysql
-     ports:
-       - "3306:3306"
-     environment:
-       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
-       MYSQL_DATABASE: wordpress
-       MYSQL_USER: wordpress
-       MYSQL_PASSWORD_FILE: /run/secrets/db_password
-     secrets:
-       - db_root_password
-       - db_password
-secrets:
-   db_password:
-     file: db_password.txt
-   db_root_password:
-     file: db_root_password.txt
+  db:
+    image: mysql:5.7
+    container_name: Mysqldb
+    restart: unless-stopped
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_KEY_BUFFER_SIZE: 16M
+      MYSQL_READ_BUFFER_SIZE: 60K
+      MYSQL_SORT_BUFFER_SIZE: 1M
+      MYSQL_INNODB_BUFFER_POOL_SIZE: 64M
+      MYSQL_TMP_TABLE_SIZE: 8M
+      MYSQL_MAX_ALLOWED_PACKET: 16M
+      MYSQL_THREAD_STACK_SIZE: 192K
+      MYSQL_THREAD_CACHE_SIZE: 8
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: unless-stopped
+    ports:
+      - "8888:8080"
 volumes:
-    db_data:
+  db_data:
+
+
+
+
+
